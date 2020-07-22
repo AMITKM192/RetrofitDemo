@@ -10,8 +10,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,11 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final TextView txt_title = findViewById(R.id.txt_title);
         final TextView txt_email = findViewById(R.id.txt_email);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        JsonClassAPi classAPi = retrofit.create(JsonClassAPi.class);
+        JsonClassAPi classAPi = RetrofitService.api;
+
         Call<List<PostModel>> call1 = classAPi.getTitle();
         Call<List<CommentsModel>> call2 = classAPi.getEmail();
 
