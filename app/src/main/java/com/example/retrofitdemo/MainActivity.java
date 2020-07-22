@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity implements ApiResponseHandle
     }
 
     @Override
-    public void onResponse(Object response) {
-        if (response instanceof List<PostModel>) {
-            List<PostModel> postModel = (List<PostModel>) response;
+    public void onResponse(Object o) {
+        if (o instanceof List<PostModel>) {
+            List<PostModel> postModel = (List<PostModel>) o;
             txt_title.setText(postModel.get(0).title);
         }
-        else if (response instanceof List<CommentsModel>) {
-            List<CommentsModel> model = (List<CommentsModel>) response;
+        else if (o instanceof List<CommentsModel>) {
+            List<CommentsModel> model = (List<CommentsModel>) o;
             txt_email.setText(model.get(0).email);
         }
     }
