@@ -1,7 +1,6 @@
 package com.example.retrofitdemo;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements ApiResponseHandler {
 
@@ -64,8 +61,14 @@ public class MainActivity extends AppCompatActivity implements ApiResponseHandle
 
     @Override
     public void onResponse(Object response) {
-        List<PostModel> model = (List<PostModel>) response;
-        txt_title.setText(model.get(0).title);
+        if (response instanceof List<PostModel>) {
+            List<PostModel> postModel = (List<PostModel>) response;
+            txt_title.setText(postModel.get(0).title);
+        }
+        else if (response instanceof List<CommentsModel>) {
+            List<CommentsModel> model = (List<CommentsModel>) response;
+            txt_email.setText(model.get(0).email);
+        }
     }
 
     @Override
