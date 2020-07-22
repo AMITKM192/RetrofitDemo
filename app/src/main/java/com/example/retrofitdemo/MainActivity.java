@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ApiResponseHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    public void onResponse(Object o) {
+
+    }
+
+    @Override
+    public void onFailure(Object o) {
 
     }
 }
