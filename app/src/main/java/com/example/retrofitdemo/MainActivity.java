@@ -1,10 +1,9 @@
 package com.example.retrofitdemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
@@ -20,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Button button = findViewById(R.id.btn);
+        final TextView txt_title = findViewById(R.id.txt_title);
+        final TextView txt_email = findViewById(R.id.txt_email);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<PostModel>> call, Response<List<PostModel>> response) {
                 List<PostModel> model = response.body();
-                Toast.makeText(MainActivity.this, model.get(0).title, Toast.LENGTH_SHORT).show();
+                if (model != null && model.size() > 0)
+                    txt_title.setText(model.get(0).title);
+
             }
 
             @Override
@@ -46,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<CommentsModel>> call, Response<List<CommentsModel>> response) {
                 List<CommentsModel> model = response.body();
-                Toast.makeText(MainActivity.this, model.get(0).email, Toast.LENGTH_SHORT).show();
-                button.setText(model.get(0).email);
+                if (model != null && model.size() > 0)
+                    txt_email.setText(model.get(0).email);
             }
 
             @Override
